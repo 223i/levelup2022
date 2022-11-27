@@ -6,8 +6,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.Optional;
-
 @SpringBootApplication
 public class Application {
 
@@ -16,11 +14,12 @@ public class Application {
     }
 
     @RestController
-    public class HelloWorldController {
+    public class ConverterController {
 
-        @GetMapping({"/hello","/hello/{name}"})
-        public String hello(@PathVariable Optional<String> name) {
-            return String.format("Hello, %s", name.orElse("World"));
+        @GetMapping({"converter/{value}"})
+        public String converter(@PathVariable Integer value) {
+            String welcomePhrase = "Let's convert from dollar to ruble:";
+            return welcomePhrase + " " + value + "$ = " + value * 60 + " RUB";
         }
     }
 
