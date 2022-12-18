@@ -85,8 +85,7 @@ public class Application {
     }
 
     public static Set<Employee> intersect(Set<Employee> set1, Set<Employee> set2) {
-        return set1.stream()
-                .filter(set2::contains)
-                .collect(Collectors.toSet());
+        set1.retainAll(set2);
+        return set1;
     }
 }
