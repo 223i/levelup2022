@@ -1,12 +1,5 @@
 package ru.levelup.lesson2;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
+public record Employee(String initials, int workAge) {
 
-@Getter
-@AllArgsConstructor
-public class Employee {
-
-    private String initials;
-    private int workAge;
 }

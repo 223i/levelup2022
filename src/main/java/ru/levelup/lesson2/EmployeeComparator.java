@@ -6,6 +6,6 @@ public class EmployeeComparator implements Comparator<Employee> {
 
     @Override
     public int compare(Employee employee1, Employee employee2) {
-        return Integer.compare(employee2.getWorkAge(), employee1.getWorkAge());
+        return Integer.compare(employee2.workAge(), employee1.workAge());
     }
 }
