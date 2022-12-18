@@ -1,4 +1,4 @@
-package ru.levelup.lesson4;
+package ru.levelup.lesson4.task1;
 
 import java.io.File;
 import java.io.IOException;
