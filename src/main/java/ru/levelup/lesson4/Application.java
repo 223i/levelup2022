@@ -1,26 +1,20 @@
 package ru.levelup.lesson4;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
+import java.io.File;
 import java.io.IOException;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class Application {
     public static void main(String[] args) throws IOException {
-        BufferedReader fileReader = new BufferedReader(
-                new FileReader("src/main/java/ru/levelup/lesson4/TextFile.txt"));
+        Scanner fileReader = new Scanner(new File("src/main/resources/TextFile.txt"));
         Map<String, Integer> words = new HashMap<>();
-        while (fileReader.ready()) {
-            Arrays.stream(fileReader.readLine().replaceAll("[@#$%^&*.,!()-_+=\"]", "")
+        while (fileReader.hasNextLine()) {
+            Arrays.stream(fileReader.nextLine().replaceAll("[@#$%^&*.,!()-+=\"]", "")
                             .split("\\s"))
                     .forEach(word -> {
                         String lcWord = word.toLowerCase();
-                        if (words.containsKey(lcWord)) words.replace(lcWord, words.get(lcWord) + 1);
-                        else words.put(lcWord, 1);
+                        if(words.putIfAbsent(lcWord, 1) != null)  words.replace(lcWord, words.get(lcWord) + 1);
                     });
         }
 
