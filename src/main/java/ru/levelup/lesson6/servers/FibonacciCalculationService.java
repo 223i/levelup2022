@@ -23,10 +23,13 @@ public class FibonacciCalculationService implements FibonacciService {
             BigInteger n0 = new BigInteger("1");
             BigInteger n1 = new BigInteger("1");
             BigInteger result = new BigInteger("0");
-            for (int i = 0; i <= numberOfValue.intValue(); i++) {
+            for (int i = 1; i <= numberOfValue.intValue(); i++) {
                 result = n0.add(n1);
                 n0 = n1;
                 n1 = result;
+                if (!calculatedValues.containsKey(BigInteger.valueOf(i))){
+                    calculatedValues.put(BigInteger.valueOf(i), result);
+                }
             }
             calculatedValues.put(numberOfValue, result);
             System.out.println("Fibonacci results for " + numberOfValue +
