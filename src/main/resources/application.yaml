@@ -1,0 +1,7 @@
+spring:
+  application:
+    name: levelup
+
+levelup:
+  application:
+    useStorage: false
