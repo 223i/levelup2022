@@ -20,4 +20,10 @@ public class CelsiusConverterImpl implements TemperatureConverter {
         System.out.println(result);
         return result;
     }
+
+    @Override
+    public TemperatureTypes returnBaseTemperatureType() {
+        return TemperatureTypes.CELSIUS;
+    }
+
 }

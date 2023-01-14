@@ -20,4 +20,9 @@ public class KelvinConverterImpl implements TemperatureConverter {
         System.out.println(result);
         return result;
     }
+
+    @Override
+    public TemperatureTypes returnBaseTemperatureType() {
+        return TemperatureTypes.KELVIN;
+    }
 }

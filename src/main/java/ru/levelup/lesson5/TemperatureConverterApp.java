@@ -3,7 +3,8 @@ package ru.levelup.lesson5;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
-import ru.levelup.lesson5.impl.CelsiusConverterImpl;
+
+import java.util.HashMap;
 
 @SpringBootApplication
 public class TemperatureConverterApp {
@@ -15,9 +16,12 @@ public class TemperatureConverterApp {
 //    получаемого конвертера, должен являться бином со скоупом
 //    Singleton.
 
+    private static HashMap<TemperatureTypes, TemperatureConverter> beansHashMap = new HashMap<>();
+
     public static void main(String[] args) {
         ConfigurableApplicationContext context = SpringApplication.run(TemperatureConverterApp.class, args);
-        CelsiusConverterImpl celsiusConverter = context.getBean(CelsiusConverterImpl.class);
-        celsiusConverter.convertTemperature(2.3, TemperatureTypes.FAHRENHEIT);
+        context.getBeansOfType(TemperatureConverter.class)
+                .forEach((key, value) -> beansHashMap.put(value.returnBaseTemperatureType(), value));
+        beansHashMap.get(TemperatureTypes.CELSIUS).convertTemperature(2.3, TemperatureTypes.FAHRENHEIT);
     }
 }
