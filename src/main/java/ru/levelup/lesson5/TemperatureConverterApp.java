@@ -18,6 +18,6 @@ public class TemperatureConverterApp {
     public static void main(String[] args) {
         ConfigurableApplicationContext context = SpringApplication.run(TemperatureConverterApp.class, args);
         CelsiusConverterImpl celsiusConverter = context.getBean(CelsiusConverterImpl.class);
-        celsiusConverter.convertTemperature(2.3, "FAHRENHEIT");
+        celsiusConverter.convertTemperature(2.3, TemperatureTypes.FAHRENHEIT);
     }
 }
