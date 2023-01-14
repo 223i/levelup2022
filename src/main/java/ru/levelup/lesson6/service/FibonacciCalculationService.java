@@ -1,19 +1,18 @@
-package ru.levelup.lesson6.servers;
+package ru.levelup.lesson6.service;
 
-import org.springframework.stereotype.Component;
-import ru.levelup.lesson6.FibonacciService;
+import org.springframework.stereotype.Service;
 
 import java.math.BigInteger;
 import java.util.HashMap;
 
-@Component
+@Service
 public class FibonacciCalculationService implements FibonacciService {
 
-    private static HashMap<BigInteger, BigInteger> calculatedValues = new HashMap<>();
+    private static HashMap<Integer, BigInteger> calculatedValues = new HashMap<>();
 
 
     @Override
-    public BigInteger calculate(BigInteger numberOfValue) {
+    public BigInteger calculate(Integer numberOfValue) {
         if (calculatedValues.containsKey(numberOfValue)) {
             System.out.println("Fibonacci results for " + numberOfValue +
                     " value is taken from cache and equals to " + calculatedValues.get(numberOfValue));
@@ -23,12 +22,12 @@ public class FibonacciCalculationService implements FibonacciService {
             BigInteger n0 = new BigInteger("1");
             BigInteger n1 = new BigInteger("1");
             BigInteger result = new BigInteger("0");
-            for (int i = 1; i <= numberOfValue.intValue(); i++) {
+            for (int i = 1; i <= numberOfValue; i++) {
                 result = n0.add(n1);
                 n0 = n1;
                 n1 = result;
-                if (!calculatedValues.containsKey(BigInteger.valueOf(i))){
-                    calculatedValues.put(BigInteger.valueOf(i), result);
+                if (!calculatedValues.containsKey(i)) {
+                    calculatedValues.put(i, result);
                 }
             }
             calculatedValues.put(numberOfValue, result);
