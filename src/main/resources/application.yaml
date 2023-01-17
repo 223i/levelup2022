@@ -2,6 +2,14 @@ spring:
   application:
     name: levelup
 
+  datasource:
+    url: jdbc:postgresql://localhost:5432/postgres
+    username: postgres
+    password: postgres
+    driverClassName: org.postgresql.Driver
+
+server:
+  port: 8081
 levelup:
   application:
     useStorage: false
