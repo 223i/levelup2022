@@ -10,8 +10,8 @@ import lombok.NoArgsConstructor;
 public class City {
 
     private Integer id;
-    private String name_ru;
-    private String name_en;
-    private Integer amount_of_citizens;
+    private String nameRu;
+    private String nameEn;
+    private Integer amountOfCitizens;
     private Region region;
 }
