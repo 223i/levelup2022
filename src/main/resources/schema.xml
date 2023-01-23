@@ -1,0 +1,52 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+   https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+
+    <changeSet author="Irina Korobeinikova" id="Create-table-regions">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="regions"/>
+            </not>
+        </preConditions>
+        <createTable tableName="regions">
+            <column name="id" type="INTEGER">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="name_ru" type="VARCHAR(255)">
+                <constraints nullable="false" unique="false"/>
+            </column>
+            <column name="name_en" type="VARCHAR(255)">
+                <constraints nullable="false" unique="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet author="Irina Korobeinikova" id="Create-table-cities">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="cities"/>
+            </not>
+        </preConditions>
+
+        <createTable tableName="cities">
+            <column name="id" type="INTEGER">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="name_ru" type="VARCHAR(255)">
+                <constraints nullable="false" unique="false"/>
+            </column>
+            <column name="name_en" type="VARCHAR(255)">
+                <constraints nullable="false" unique="false"/>
+            </column>
+            <column name="amount_of_citizens" type="INTEGER">
+                <constraints nullable="false" unique="false"/>
+            </column>
+            <column name="id_of_region" type="INTEGER">
+                <constraints nullable="false" foreignKeyName="FK_regions_id"
+                             references="regions(id)"/>>
+            </column>
+        </createTable>
+    </changeSet>
+</databaseChangeLog>

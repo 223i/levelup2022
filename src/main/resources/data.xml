@@ -1,0 +1,35 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+   http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+
+    <changeSet author="Irina Korobeinikova" id="Populate-table-cities-and-regions">
+        <preConditions>
+            <sqlCheck expectedResult="0"><![CDATA[
+                select count(*)
+                from cities
+                where id = 495
+                ]]></sqlCheck>
+            <sqlCheck expectedResult="0"><![CDATA[
+                select count(*)
+                from regions
+                where id = 77
+                ]]></sqlCheck>
+        </preConditions>
+
+        <insert tableName="regions">
+            <column name="id" valueComputed="77"/>
+            <column name="name_ru" value="Москва и Московская обл"/>
+            <column name="name_en" value="Moscow region"/>
+        </insert>
+        <insert tableName="cities">
+            <column name="id" value="495"/>
+            <column name="name_ru" value="Москва"/>
+            <column name="name_en" value="Moscow"/>
+            <column name="amount_of_citizens" value="13000000"/>
+            <column name="id_of_region" value="77"/>
+        </insert>
+    </changeSet>
+
+</databaseChangeLog>
