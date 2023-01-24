@@ -1,5 +1,7 @@
 package ru.levelup.lesson8.entity;
 
+import lombok.*;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -7,6 +9,11 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "regions")
+@Getter
+@Setter
+@ToString
+@NoArgsConstructor
+@AllArgsConstructor
 public class Region {
 
     @Id

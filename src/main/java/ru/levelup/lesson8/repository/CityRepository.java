@@ -11,4 +11,8 @@ public interface CityRepository extends JpaRepository<City, Integer> {
     @Query("select city from City city "+
             "where city.id = :id and city.nameRu = :nameRu")
     List<City> findCityByNameRuAndId(Integer id, String nameRu);
+
+    @Query("select city from City city "+
+            "where city.id = :id and city.nameRu = :nameRu")
+    List<City> createCityWithSpecifiedRegion(Integer id, String nameRu);
 }
