@@ -1,8 +1,17 @@
 package ru.levelup.lesson8.entity;
 
-import lombok.*;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
+import lombok.AllArgsConstructor;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.ManyToOne;
+import javax.persistence.JoinColumn;
 
 @Entity
 @Table(name = "cities")
@@ -13,7 +22,7 @@ import javax.persistence.*;
 @AllArgsConstructor
 public class City {
 
-    @Id()
+    @Id
     private Integer id;
 
     @Column(name = "name_ru")
