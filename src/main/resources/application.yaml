@@ -8,6 +8,10 @@ spring:
     password: postgres
     driverClassName: org.postgresql.Driver
 
+  liquibase:
+    enabled: true
+    change-log: 'classpath:changeLog.xml'
+
 server:
   port: 8081
 levelup:

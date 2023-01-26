@@ -23,7 +23,7 @@ public class CityDaoImpl implements CityDao {
         this.jdbcOperations = jdbcOperations;
         this.cityRowMapper = (rs, row) -> {
             final City city = new City();
-            city.setId(rs.getInt("id_city"));
+            city.setId(rs.getInt("id"));
             city.setNameRu(rs.getString("name_ru"));
             city.setNameEn(rs.getString("name_en"));
             city.setAmountOfCitizens(rs.getInt("amount_of_citizens"));
@@ -42,10 +42,10 @@ public class CityDaoImpl implements CityDao {
 
     @Override
     public Optional<City> getById(int cityId) {
-        final String sql = "select id_city, name_ru, name_en, amount_of_citizens, id_of_region from cities s " +
-                "where id_city = :cityId";
+        final String sql = "select id, name_ru, name_en, amount_of_citizens, id_of_region from cities s " +
+                "where id = :cityId";
         try {
-            return Optional.of(jdbcOperations.queryForObject(sql, Map.of("id_city", cityId), cityRowMapper));
+            return Optional.of(jdbcOperations.queryForObject(sql, Map.of("id", cityId), cityRowMapper));
         } catch (Exception e) {
             return Optional.empty();
         }
@@ -53,7 +53,7 @@ public class CityDaoImpl implements CityDao {
 
     @Override
     public int create(City city) {
-        final String sqlQuery = "insert into cities (id_city, name_ru, name_en, amount_of_citizens, id_of_region) " +
+        final String sqlQuery = "insert into cities (id, name_ru, name_en, amount_of_citizens, id_of_region) " +
                 "values (:id, :name_ru, :name_en, :amount_of_citizens, :id_of_region)";
         MapSqlParameterSource namedParameters = new MapSqlParameterSource();
         final Integer id = city.getId();
@@ -77,7 +77,7 @@ public class CityDaoImpl implements CityDao {
                 "name_en = :name_en, " +
                 "amount_of_citizens = :amount_of_citizens, " +
                 "id_of_region = :id_of_region " +
-                "where id_city = :id";
+                "where id = :id";
         jdbcOperations.update(sqlQuery, Map.of(
                 "id", city.getId(),
                 "name_ru", city.getNameRu(),
@@ -88,7 +88,7 @@ public class CityDaoImpl implements CityDao {
 
     @Override
     public void deleteById(int cityId) {
-        String sqlQuery = "delete from cities c where c.id_city = :cityId";
+        String sqlQuery = "delete from cities c where c.id = :cityId";
         jdbcOperations.update(sqlQuery, Map.of("cityId", cityId));
     }
 }

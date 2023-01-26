@@ -29,10 +29,10 @@ public class RegionDaoImpl implements RegionDao {
 
     @Override
     public Optional<Region> getById(int regionId) {
-        final String sql = "select id_region, name_ru, name_en from regions r " +
-                "where id_region = :regionId";
+        final String sql = "select id, name_ru, name_en from regions r " +
+                "where id = :regionId";
         try {
-            return Optional.of(jdbcOperations.queryForObject(sql, Map.of("id_region", regionId), regionRowMapper));
+            return Optional.of(jdbcOperations.queryForObject(sql, Map.of("id", regionId), regionRowMapper));
         } catch (Exception e) {
             return Optional.empty();
         }
@@ -40,7 +40,7 @@ public class RegionDaoImpl implements RegionDao {
 
     @Override
     public int create(Region region) {
-        final String sqlQuery = "insert into regions (id_region, name_ru, name_en) " +
+        final String sqlQuery = "insert into regions (id, name_ru, name_en) " +
                 "values (:id, :name_ru, :name_en)";
         MapSqlParameterSource namedParameters = new MapSqlParameterSource();
         final Integer id = region.getId();
