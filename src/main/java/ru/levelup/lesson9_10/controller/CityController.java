@@ -1,0 +1,61 @@
+package ru.levelup.lesson9_10.controller;
+
+import lombok.RequiredArgsConstructor;
+import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.*;
+import ru.levelup.lesson9_10.dto.CityDto;
+import ru.levelup.lesson9_10.entity.City;
+import ru.levelup.lesson9_10.service.CityService;
+
+import java.util.List;
+import java.util.Optional;
+import java.util.Random;
+import java.util.stream.Collectors;
+
+@Validated
+@RestController
+@RequiredArgsConstructor
+@RequestMapping("/api/city")
+public class CityController {
+
+    @Autowired
+    private ModelMapper modelMapper;
+    private final CityService cityService;
+
+
+    @GetMapping("/findById")
+    public ResponseEntity<CityDto> findById(@RequestParam Integer id) {
+        Optional<City> city = cityService.findById(id);
+        return city.map(result -> new ResponseEntity<>(modelMapper.map(result, CityDto.class), HttpStatus.FOUND))
+                .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
+    }
+
+    @GetMapping("/findByIdAndNameRu")
+    public List<CityDto> findByIdAndNameRu(@RequestParam Integer id, @RequestParam String nameRu) {
+        return cityService.findByIdAndNameRu(id, nameRu).stream()
+                .map(city -> modelMapper.map(city, CityDto.class))
+                .collect(Collectors.toList());
+    }
+
+    @PostMapping("/create")
+    public void create(@RequestBody CityDto city) {
+        city.setId(Math.abs(new Random().nextInt()));
+        City cityEntity = modelMapper.map(city, City.class);
+        cityService.create(cityEntity);
+    }
+
+    @PutMapping("/update")
+    public void update(@RequestBody CityDto city) {
+        City cityEntity = modelMapper.map(city, City.class);
+        cityService.update(cityEntity);
+    }
+
+    @DeleteMapping("/deleteById")
+    public void deleteById(@RequestParam Integer id) {
+        cityService.deleteById(id);
+    }
+}
