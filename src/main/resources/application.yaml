@@ -13,7 +13,9 @@ spring:
     change-log: 'classpath:changeLog.xml'
 
 server:
-  port: 8081
+  port: 8080
+  servlet:
+    context-path: /catalog
 levelup:
   application:
     useStorage: false
