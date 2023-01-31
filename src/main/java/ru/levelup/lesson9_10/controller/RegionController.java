@@ -11,6 +11,7 @@ import ru.levelup.lesson9_10.dto.RegionDto;
 import ru.levelup.lesson9_10.entity.Region;
 import ru.levelup.lesson9_10.service.RegionService;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
 import java.util.Random;
@@ -26,14 +27,14 @@ public class RegionController {
     private final RegionService regionService;
 
     @GetMapping("/findById")
-    public ResponseEntity<RegionDto> findById(@RequestParam Integer id) {
+    public ResponseEntity<RegionDto> findById(@RequestParam @Valid Integer id) {
         Optional<Region> region = regionService.findById(id);
         return region.map(result -> new ResponseEntity<>(modelMapper.map(result, RegionDto.class), HttpStatus.FOUND))
                 .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
     @GetMapping("/findByNameRu")
-    public List<RegionDto> findByNameRu(@RequestParam String nameRu) {
+    public List<RegionDto> findByNameRu(@RequestParam @Valid String nameRu) {
         return regionService.findByNameRu(nameRu).stream()
                 .map(region -> modelMapper.map(region, RegionDto.class))
                 .collect(Collectors.toList());
@@ -54,7 +55,7 @@ public class RegionController {
 
     @DeleteMapping("/deleteById")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void deleteById(@RequestParam Integer id) {
+    public void deleteById(@RequestParam @Valid Integer id) {
         regionService.deleteById(id);
     }
 }
