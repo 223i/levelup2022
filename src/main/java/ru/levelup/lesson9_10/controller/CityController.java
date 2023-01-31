@@ -43,7 +43,8 @@ public class CityController {
     }
 
     @PostMapping("/create")
-    public void create(@RequestBody CityDto city) throws Exception {
+    @ResponseStatus(HttpStatus.CREATED)
+    public void create(@RequestBody CityDto city) {
         city.setId(Math.abs(new Random().nextInt()));
         City cityEntity = modelMapper.map(city, City.class);
         cityService.create(cityEntity);
